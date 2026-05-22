@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoTrack - Carbon Footprint Calculator</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4fbf6;
+      color: #1f2937;
+    }
+
+    header {
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 42px;
+    }
+
+    header p {
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      margin-bottom: 25px;
+    }
+
+    h2 {
+      color: #15803d;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: #16a34a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #15803d;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #dcfce7;
+      border-left: 5px solid #16a34a;
+      border-radius: 8px;
+      font-size: 18px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-box {
+      background: #f0fdf4;
+      padding: 18px;
+      border-radius: 12px;
+      border: 1px solid #bbf7d0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #14532d;
+      color: white;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>EcoTrack</h1>
+    <p>Smart Carbon Footprint Calculator for Sustainable Living</p>
+  </header>
+
+  <div class="container">
+
+    <div class="card">
+      <h2>About the Project</h2>
+      <p>
+        EcoTrack is a simple open-source web project that helps users calculate
+        their approximate daily carbon footprint based on travel and electricity usage.
+        The goal is to create awareness about eco-friendly habits.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Carbon Footprint Calculator</h2>
+
+      <label>Daily travel distance by vehicle (km):</label>
+      <input type="number" id="travel" placeholder="Example: 15">
+
+      <label>Daily electricity usage (units/kWh):</label>
+      <input type="number" id="electricity" placeholder="Example: 5">
+
+      <button onclick="calculateCarbon()">Calculate</button>
+
+      <div id="result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="card">
+      <h2>Project Features</h2>
+      <div class="features">
+        <div class="feature-box">
+          <h3>Easy Calculator</h3>
+          <p>Calculates estimated carbon footprint using simple inputs.</p>
+        </div>
+
+        <div class="feature-box">
+          <h3>Eco Awareness</h3>
+          <p>Encourages users to reduce pollution and save energy.</p>
+        </div>
+
+        <div class="feature-box">
+          <h3>Open Source</h3>
+          <p>Anyone can improve the project by adding tips or features.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Created for OSS Organization Project | GitHub Collaboration</p>
+  </footer>
+
+  <script>
+    function calculateCarbon() {
+      let travel = Number(document.getElementById("travel").value);
+      let electricity = Number(document.getElementById("electricity").value);
+
+      let travelCarbon = travel * 0.21;
+      let electricityCarbon = electricity * 0.82;
+      let total = travelCarbon + electricityCarbon;
+
+      let message = "";
+
+      if (total < 5) {
+        message = "Great! Your carbon footprint is low.";
+      } else if (total < 10) {
+        message = "Moderate footprint. Try saving more energy.";
+      } else {
+        message = "High footprint. Use public transport and reduce electricity usage.";
+      }
+
+      document.getElementById("result").style.display = "block";
+      document.getElementById("result").innerHTML =
+        "Estimated Daily Carbon Footprint: <b>" + total.toFixed(2) +
+        " kg CO₂</b><br>" + message;
+    }
+  </script>
+
+</body>
+</html>
